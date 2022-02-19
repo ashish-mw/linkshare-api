@@ -66,9 +66,9 @@ const db = {
       .prepare(
         `SELECT
         shares.id, shares.title, shares.link, shares.user, shares.created_at, shares.updated_at,
-        users.id, users.username
+        users.id as userid, users.username
         FROM shares
-        INNER JOIN users ON users.id = shares.user
+        INNER JOIN users ON userid = shares.user
         ORDER BY shares.created_at DESC LIMIT ? OFFSET ?;`
       )
       .all(limit, skip);
