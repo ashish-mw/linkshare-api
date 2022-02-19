@@ -1,0 +1,3 @@
+# linkshare api
+
+## Getting started
