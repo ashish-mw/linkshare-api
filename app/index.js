@@ -4,7 +4,12 @@ const express = require("express");
 const app = express();
 const routes = require("./routes");
 
+const { notFound, errorHandler } = require("./middlewares");
+
+// routes
 app.use("/api", routes);
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(config.port, (err) => {
   if (err) {
