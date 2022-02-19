@@ -29,5 +29,10 @@ router.put(
   [validate(schemas.updateShareSchema), requireUser],
   controller.updateShare
 );
+router.delete(
+  "/shares/:id",
+  [validate(schemas.deleteShareSchema), requireUser],
+  controller.deleteShare
+);
 
 module.exports = router;

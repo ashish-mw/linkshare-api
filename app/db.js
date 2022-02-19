@@ -52,6 +52,12 @@ const db = {
         id,
       });
   },
+  deleteShare: function ({ id, user }) {
+    return __db.prepare(`DELETE FROM shares WHERE id=@id AND user=@user;`).run({
+      user,
+      id,
+    });
+  },
 };
 
 module.exports = db;

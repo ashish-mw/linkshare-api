@@ -89,3 +89,13 @@ exports.updateShare = (req, res, next) => {
   db.updateShare(payload);
   return res.sendStatus(200);
 };
+
+exports.deleteShare = (req, res, next) => {
+  let params = req.xop.params;
+  const payload = {
+    user: res.locals.user.id,
+    id: params.id,
+  };
+  db.deleteShare(payload);
+  return res.sendStatus(200);
+};

@@ -29,3 +29,9 @@ exports.updateShareSchema = joi.object().keys({
     id: joi.string().required(),
   }),
 });
+
+exports.deleteShareSchema = joi.object().keys({
+  params: joi.object().keys({
+    id: joi.string().required(),
+  }),
+});
