@@ -2,6 +2,9 @@ const config = require("./config");
 
 const express = require("express");
 const app = express();
+const routes = require("./routes");
+
+app.use("/api", routes);
 
 app.listen(config.port, (err) => {
   if (err) {
