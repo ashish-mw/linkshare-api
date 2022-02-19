@@ -35,3 +35,9 @@ exports.deleteShareSchema = joi.object().keys({
     id: joi.string().required(),
   }),
 });
+
+exports.getAllSharesSchema = joi.object().keys({
+  query: joi.object().keys({
+    page: joi.number().optional(),
+  }),
+});

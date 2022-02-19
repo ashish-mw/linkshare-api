@@ -99,3 +99,17 @@ exports.deleteShare = (req, res, next) => {
   db.deleteShare(payload);
   return res.sendStatus(200);
 };
+
+exports.getAllShares = (req, res, next) => {
+  let query = req.xop.query;
+  let page = query.page || 1;
+  const limit = 20; // 20 shares at a time
+  const skip = page * limit - limit;
+  const { count } = db.getSharesCount();
+  const shares = db.getSharesPublic({ skip, limit });
+
+  return res.send({
+    shares,
+    count,
+  });
+};

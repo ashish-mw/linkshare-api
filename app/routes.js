@@ -35,4 +35,11 @@ router.delete(
   controller.deleteShare
 );
 
+// public link fetch
+router.get(
+  "/shares/all",
+  validate(schemas.getAllSharesSchema),
+  controller.getAllShares
+);
+
 module.exports = router;

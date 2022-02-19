@@ -58,6 +58,21 @@ const db = {
       id,
     });
   },
+  getSharesCount: function () {
+    return __db.prepare(`SELECT COUNT(id) as count FROM shares;`).get();
+  },
+  getSharesPublic: function ({ skip, limit }) {
+    return __db
+      .prepare(
+        `SELECT
+        shares.id, shares.title, shares.link, shares.user, shares.created_at, shares.updated_at,
+        users.id, users.username
+        FROM shares
+        INNER JOIN users ON users.id = shares.user
+        ORDER BY shares.created_at DESC LIMIT ? OFFSET ?;`
+      )
+      .all(limit, skip);
+  },
 };
 
 module.exports = db;
