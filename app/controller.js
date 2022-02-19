@@ -42,6 +42,7 @@ exports.createSession = async (req, res, next) => {
 
   const accessToken = utils.signJWT({
     username: user.username,
+    id: user.id,
   });
 
   return res.json({
@@ -52,5 +53,6 @@ exports.createSession = async (req, res, next) => {
 exports.getUser = (req, res, next) => {
   return res.json({
     username: res.locals.user.username,
+    id: res.locals.user.id,
   });
 };

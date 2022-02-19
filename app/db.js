@@ -9,7 +9,7 @@ const __db = new Database(config.db, {
 const db = {
   findUser: function ({ username }) {
     return __db
-      .prepare(`SELECT username, password FROM users WHERE username=?;`)
+      .prepare(`SELECT id, username, password FROM users WHERE username=?;`)
       .get(username);
   },
   insertUser: function ({ username, password }) {
