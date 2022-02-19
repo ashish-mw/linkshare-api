@@ -22,6 +22,24 @@ const db = {
         password,
       });
   },
+  createShare: function ({ title, link, user }) {
+    return __db
+      .prepare(
+        `INSERT INTO shares (title, link, user) VALUES (@title, @link, @user);`
+      )
+      .run({
+        title,
+        link,
+        user,
+      });
+  },
+  getUserShares: function ({ user }) {
+    return __db
+      .prepare(
+        `SELECT id, title, link, created_at, updated_at FROM shares WHERE user=? ORDER BY updated_at DESC;`
+      )
+      .all(user);
+  },
 };
 
 module.exports = db;

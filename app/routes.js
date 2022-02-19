@@ -18,5 +18,11 @@ router.post(
 );
 
 router.get("/users", requireUser, controller.getUser);
+router.post(
+  "/shares",
+  [validate(schemas.createShareSchema), requireUser],
+  controller.createShare
+);
+router.get("/shares", requireUser, controller.getUserShares);
 
 module.exports = router;

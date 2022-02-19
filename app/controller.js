@@ -56,3 +56,23 @@ exports.getUser = (req, res, next) => {
     id: res.locals.user.id,
   });
 };
+
+exports.createShare = (req, res, next) => {
+  let body = req.xop.body;
+  const payload = {
+    user: res.locals.user.id,
+    ...body,
+  };
+
+  db.createShare(payload);
+  return res.sendStatus(201);
+};
+
+exports.getUserShares = (req, res, next) => {
+  const shares = db.getUserShares({
+    user: res.locals.user.id,
+  });
+  return res.json({
+    shares,
+  });
+};
