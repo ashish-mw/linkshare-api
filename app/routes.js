@@ -24,5 +24,10 @@ router.post(
   controller.createShare
 );
 router.get("/shares", requireUser, controller.getUserShares);
+router.put(
+  "/shares/:id",
+  [validate(schemas.updateShareSchema), requireUser],
+  controller.updateShare
+);
 
 module.exports = router;

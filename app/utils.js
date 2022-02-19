@@ -8,3 +8,6 @@ exports.signJWT = (payload) => {
 exports.verifyJWT = (token) => {
   return jwt.verify(token, config.jwtSecret);
 };
+
+exports.nowForSQL = () =>
+  new Date().toISOString().slice(0, 19).replace("T", " ");

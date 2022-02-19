@@ -40,6 +40,18 @@ const db = {
       )
       .all(user);
   },
+  updateShare: function ({ title, updated_at, id, user }) {
+    return __db
+      .prepare(
+        `UPDATE shares SET title=@title, updated_at=@updated_at WHERE id=@id AND user=@user;`
+      )
+      .run({
+        title,
+        updated_at,
+        user,
+        id,
+      });
+  },
 };
 
 module.exports = db;

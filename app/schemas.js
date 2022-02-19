@@ -25,4 +25,7 @@ exports.updateShareSchema = joi.object().keys({
   body: joi.object().keys({
     title: joi.string().required(),
   }),
+  params: joi.object().keys({
+    id: joi.string().required(),
+  }),
 });

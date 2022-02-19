@@ -76,3 +76,16 @@ exports.getUserShares = (req, res, next) => {
     shares,
   });
 };
+
+exports.updateShare = (req, res, next) => {
+  let body = req.xop.body;
+  let params = req.xop.params;
+  const payload = {
+    updated_at: utils.nowForSQL(),
+    title: body.title,
+    user: res.locals.user.id,
+    id: params.id,
+  };
+  db.updateShare(payload);
+  return res.sendStatus(200);
+};
