@@ -11,4 +11,10 @@ router.post(
   controller.createUser
 );
 
+router.post(
+  "/sessions",
+  validate(schemas.createSessionSchema),
+  controller.createSession
+);
+
 module.exports = router;

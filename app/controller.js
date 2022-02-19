@@ -1,6 +1,8 @@
 const db = require("./db");
 const argon2 = require("argon2");
 
+const utils = require("./utils");
+
 exports.createUser = async (req, res, next) => {
   const body = req.xop.body;
 
@@ -18,4 +20,31 @@ exports.createUser = async (req, res, next) => {
     password: password,
   });
   return res.sendStatus(201);
+};
+
+exports.createSession = async (req, res, next) => {
+  const body = req.xop.body;
+  const user = db.findUser({ username: body.username });
+  if (!user) {
+    return next({
+      status: 404,
+      message: "User not found",
+    });
+  }
+
+  const passwordOK = await argon2.verify(user.password, body.password);
+  if (!passwordOK) {
+    return next({
+      status: 400,
+      message: "Password is incorrect",
+    });
+  }
+
+  const accessToken = utils.signJWT({
+    username: user.username,
+  });
+
+  return res.json({
+    accessToken,
+  });
 };
