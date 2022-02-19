@@ -48,3 +48,9 @@ exports.createSession = async (req, res, next) => {
     accessToken,
   });
 };
+
+exports.getUser = (req, res, next) => {
+  return res.json({
+    username: res.locals.user.username,
+  });
+};

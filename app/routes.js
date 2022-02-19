@@ -3,7 +3,7 @@ const router = Router();
 
 const controller = require("./controller");
 const schemas = require("./schemas");
-const { validate } = require("./middlewares");
+const { validate, requireUser } = require("./middlewares");
 
 router.post(
   "/users",
@@ -16,5 +16,7 @@ router.post(
   validate(schemas.createSessionSchema),
   controller.createSession
 );
+
+router.get("/users", requireUser, controller.getUser);
 
 module.exports = router;

@@ -6,10 +6,11 @@ const morgan = require("morgan");
 const app = express();
 const routes = require("./routes");
 
-const { notFound, errorHandler } = require("./middlewares");
+const { notFound, errorHandler, deserializeUser } = require("./middlewares");
 
 app.use(express.json());
 app.use(morgan("combined"));
+app.use(deserializeUser);
 // routes
 app.use("/api", routes);
 app.use(notFound);

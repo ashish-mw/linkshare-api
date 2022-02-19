@@ -1,3 +1,5 @@
+const utils = require("./utils");
+
 exports.notFound = (req, res, next) => {
   next({
     status: 404,
@@ -35,4 +37,25 @@ exports.validate = (schema) => (req, res, next) => {
   } catch (e) {
     next({ ...e, status: 400 });
   }
+};
+
+exports.deserializeUser = (req, res, next) => {
+  const accessToken = req.headers.authorization?.replace(/^Bearer\s/, "");
+  if (!accessToken) {
+    return next();
+  }
+  const decoded = utils.verifyJWT(accessToken);
+  res.locals.user = decoded;
+  next();
+};
+
+exports.requireUser = (req, res, next) => {
+  const user = res.locals.user;
+  if (!user) {
+    return next({
+      status: 403,
+      message: "Authorization required",
+    });
+  }
+  next();
 };
