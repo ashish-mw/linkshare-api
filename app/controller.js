@@ -111,5 +111,6 @@ exports.getAllShares = (req, res, next) => {
   return res.send({
     shares,
     count,
+    pages: Math.ceil(count / limit),
   });
 };
