@@ -36,7 +36,12 @@ const db = {
   getUserShares: function ({ user }) {
     return __db
       .prepare(
-        `SELECT id, title, link, created_at, updated_at FROM shares WHERE user=? ORDER BY updated_at DESC;`
+        `SELECT
+        shares.id, shares.title, shares.link, shares.user, shares.created_at, shares.updated_at,
+        users.id as user_id, users.username
+        FROM shares
+        INNER JOIN users ON shares.user = users.id
+        WHERE shares.user=? ORDER BY shares.updated_at DESC;`
       )
       .all(user);
   },
