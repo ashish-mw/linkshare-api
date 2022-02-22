@@ -24,11 +24,7 @@ router.post(
   controller.createShare
 );
 router.get("/shares", requireUser, controller.getUserShares);
-router.get(
-  "/shares/:id",
-  [validate(schemas.getShareSchema), requireUser],
-  controller.getUserShareInfo
-);
+
 router.put(
   "/shares/:id",
   [validate(schemas.updateShareSchema), requireUser],
@@ -45,6 +41,12 @@ router.get(
   "/shares/all",
   validate(schemas.getAllSharesSchema),
   controller.getAllShares
+);
+// private link fetch
+router.get(
+  "/shares/:id",
+  [validate(schemas.getShareSchema), requireUser],
+  controller.getUserShareInfo
 );
 
 module.exports = router;
