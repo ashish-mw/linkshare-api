@@ -77,6 +77,18 @@ exports.getUserShares = (req, res, next) => {
   });
 };
 
+exports.getUserShareInfo = (req, res, next) => {
+  let params = req.xop.params;
+  const payload = {
+    user: res.locals.user.id,
+    id: params.id,
+  };
+  const share = db.getUserShareInfo(payload);
+  return res.json({
+    share,
+  });
+};
+
 exports.updateShare = (req, res, next) => {
   let body = req.xop.body;
   let params = req.xop.params;

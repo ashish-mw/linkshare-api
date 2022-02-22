@@ -36,6 +36,12 @@ exports.deleteShareSchema = joi.object().keys({
   }),
 });
 
+exports.getShareSchema = joi.object().keys({
+  params: joi.object().keys({
+    id: joi.string().required(),
+  }),
+});
+
 exports.getAllSharesSchema = joi.object().keys({
   query: joi.object().keys({
     page: joi.number().optional(),

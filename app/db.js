@@ -45,6 +45,18 @@ const db = {
       )
       .all(user);
   },
+  getUserShareInfo: function ({ user, id }) {
+    return __db
+      .prepare(
+        `SELECT
+        shares.id, shares.title, shares.link, shares.user, shares.created_at, shares.updated_at,
+        users.id as user_id, users.username
+        FROM shares
+        INNER JOIN users ON shares.user = users.id
+        WHERE shares.user=? AND shares.id=?;`
+      )
+      .get(user, id);
+  },
   updateShare: function ({ title, updated_at, id, user }) {
     return __db
       .prepare(

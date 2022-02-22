@@ -24,6 +24,11 @@ router.post(
   controller.createShare
 );
 router.get("/shares", requireUser, controller.getUserShares);
+router.get(
+  "/shares/:id",
+  [validate(schemas.getShareSchema), requireUser],
+  controller.getUserShareInfo
+);
 router.put(
   "/shares/:id",
   [validate(schemas.updateShareSchema), requireUser],
